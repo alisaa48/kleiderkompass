@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="de">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KleiderKompass</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/css/bootstrap.min.css"
   </head>
 
   <body>
@@ -10,25 +14,108 @@
       <p>Gemeinsam Hilfe in die Wege leiten!</p>
 
       <nav>
-        <a href="#start">Startseite</a>
-        <a href="#registrierung">Spende registrieren</a>
+        <ul class="text-end">
+          <li class="d-inline">
+            <a href="#start">Startseite</a>
+          </li>
+          <li class="d-inline">
+            <a href="#registrierung">Spende registrieren</a>
+          </li>
+        </ul>
       </nav>
     </header>
 
-    <main id="start">
-      <h2>Willkommen beim KleiderKompass</h2>
-      <p>
-        Registriere deine Kleiderspende und unterstütze Menschen in Krisengebieten.
-      </p>
+    <main id="start" class="container">
+      <div class="row">
+        <div class="col-lg-4 col-sm-12">
+          <h2>Willkommen beim KleiderKompass</h2>
+          <p>
+            Registriere deine Kleiderspende und unterstütze Menschen in Krisengebieten.
+          </p>
+        </div>
 
-      <section id="registrierung">
-        <h2>Kleiderspende registrieren</h2>
-        <p>Hier entsteht unser Registrierungsformular.</p>
-      </section>
+        <div class="col-lg-8 col-sm-12">
+          <section id="registrierung">
+            <h2>Kleiderspende registrieren</h2>
+
+            <form>
+              <p>WIe möchtest du deine Kleiderspende übergeben?</p>
+              <select name="uebergabeart">
+                <option value="geschaeftsstelle">Persönliche Übergabe</option>
+                <option value="abholung">Abholung</option>
+              </select>
+
+              <p>Krisengebiet auswählen:</p>
+              <select name="krisengebiet">
+                <option value="ukraine">Ukraine</option>
+                <option value="sudan">Sudan</option>
+              </select>
+
+              <p>Art der Kleidung auswählen:</p>
+              <select name="kleidungsart">
+                <option value="jacken">Jacken</option>
+                <option value="hosen">Hosen</option>
+                <option value="shirts">T-Shirts</option>
+                <option value="schuhe">Schuhe</option>
+              </select>
+
+              <div id="abholadresse">
+                <p>Abholadresse:</p>
+
+                <input type="text" name="strasse"
+                        placeholder="Straße und Hausnummer">
+
+                <input type="text" name="plz"
+                        placeholder="Postleitzahl">
+
+                <input type="text" name="ort"
+                        placeholder="Ort">
+              </div>
+              <input type="submit" value="Registrierung prüfen">
+            </form>
+            <p>Hier entsteht unser Registrierungsformular</p>
+          </section>
+        </div>
+      </div>
     </main>
 
     <footer>
       <p>&copy; 2026 KleiderKompass - Fiktives Studienprojekt</p>
     </footer>
+
+    <script>
+      let uebergabe = document.querySelector('select[name="uebergabeart"]');
+      let adresse = document.querySelector("#abholadresse");
+
+      adresse.style["display"] = "none";
+
+      uebergabe.onchange = function() {
+        if (uebergabe.value === "abholung") {
+          adresse.style["display"] = "block";
+        } else {
+          adresse.style["display"] = "none";
+        }
+      };
+
+      document.querySelector("form").onsubmit = function() {
+
+        if(uebergabe.value === "abholung") {
+          let plz = document.querySelector('input[name="plz"]').value;
+
+          if (plz.length !== 5) {
+            alert("Ungültige Postleitzahl");
+            return false;
+          }
+
+          if (plz.slice(0,2) !== "10") {
+            alert("Eine Abholung ist in diesem Bereich nicht möglich");
+            return false;
+          }
+        }
+
+        alert("Die erste Prüfung war erfolgreich!");
+        return false;
+      };
+    </script>
   </body>
 </html>
