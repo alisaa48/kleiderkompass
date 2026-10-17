@@ -47,12 +47,14 @@
 
               <p>Krisengebiet auswählen:</p>
               <select name="krisengebiet">
+                <option value="">Bitte auswählen</option>
                 <option value="ukraine">Ukraine</option>
                 <option value="sudan">Sudan</option>
               </select>
 
               <p>Art der Kleidung auswählen:</p>
               <select name="kleidungsart">
+                <option value="">Bitte auswählen</option>
                 <option value="jacken">Jacken</option>
                 <option value="hosen">Hosen</option>
                 <option value="shirts">T-Shirts</option>
@@ -99,14 +101,43 @@
 
       document.querySelector("form").onsubmit = function() {
 
+        let krisengebiet = document.querySelector('select[name="krisengebiet"]').value;
+        let kleidungsart = document.querySelector('select[name="kleidungsart"]').value;
+
+        if (krisengebiet ==="" || kleidungsart === "") {
+          alert("Bitte Krisengebiet und Kleidungsart auswählen.");
+          return false;
+        }
+
+        //Adresse für Abholung überprüfen
         if(uebergabe.value === "abholung") {
+          let strasse = document.querySelector('input[name="strasse"]').value.trim();
+          let ort = document.querySelector('input[name="ort"]').value.trim();
           let plz = document.querySelector('input[name="plz"]').value;
 
+          //prüft, ob Straße und Ort eingetragen sind
+          if (strasse.length === 0 || ort.length === 0) {
+            alert("Bitte Straße und Ort eingeben.");
+            return false;
+          }
+      
+          //prüft, ob Plz 5 Zeichen lang ist
           if (plz.length !== 5) {
             alert("Ungültige Postleitzahl");
             return false;
           }
 
+          //prüft, ob nur Ziffern enthalten sind
+          for (let i = 0; i < plz.length; i++) {
+            let zeichen = plz.slice(i, i + 1);
+
+            if (zeichen < "0" || zeichen > "9") {
+              alert("Die Postleitzahl darf nur Ziffern enthalten.");
+              return false;
+            }
+          }
+
+          //prüft, ob die Plz mit 10 beginnt (gültiger Bereich)
           if (plz.slice(0,2) !== "10") {
             alert("Eine Abholung ist in diesem Bereich nicht möglich");
             return false;
