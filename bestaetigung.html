@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestätigung</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/css/bootstrap.min.css">
+  </head>
+  <body>
+    <header class="container">
+      <h1>KleiderKompass</h1>
+    </header>
+
+    <main class="container">
+
+      <div id="bestaetigung"> 
+        <h2>Registrierung erfolgreich!</h2>
+        <p>Vielen Dank für deine Kleiderspende</p>
+
+        <h3>Deine Angaben:</h3>
+
+        <p id="anzeige-kleidungsart"></p>
+        <p id="anzeige-krisengebiet"></p>
+        <p id="anzeige-uebergabeart"></p>
+        <p id="anzeige-datum"></p>
+        <p id="anzeige-uhrzeit"></p>
+        <p id="anzeige-ort"></p>
+      </div>
+
+      <p id="fehlermeldung"></p>
+
+    </main>
+
+    <footer class="container">
+      <p>&copy; 2026 KleiderKompass - Fiktives Studienprojekt</p>
+    </footer>
+
+    <script>
+      //gespeicherte Registrierungsdaten ausleen
+      let gespeicherteDaten = sessionStorage.getItem("kleiderspende");
+
+      //prüfen, ob Daten aus Registrierung vorhanden sind
+      if (gespeicherteDaten !== null) {
+
+        //JSON-Text in Objekt umwandeln
+        let spende = JSON.parse(gespeicherteDaten);
+
+        //Kleidungsart und Krisengebiet anzeigen
+        document.querySelector("#anzeige-kleidungsart").innerText = "Kleidungsart: " + spende.kleidungsart; 
+        
+        document.querySelector("#anzeige-krisengebiet").innerText = "Krisengebiet " + spende.krisengebiet;
+
+        document.querySelector("#anzeige-datum").innerText = "Datum: " + spende.datum;
+
+        document.querySelector("#anzeige-uhrzeit").innerText = "Uhrzeit: " + spende.uhrzeit;
+
+        //richtigen Ort der entsprechenden Übergabeart anzeigen
+        if(spende.uebergabeart === "abholung") {
+
+          document.querySelector("#anzeige-uebergabeart").innerText = "Übergabeart: Abholung";
+
+          document.querySelector("#anzeige-ort").innerText = "Abholadresse: " + spende.strasse + ", " + spende.plz + " " + spende.ort;
+        } else {
+
+          document.querySelector("#anzeige-uebergabeart").innerText = "Übergabeart: Persönliche Übergabe";
+
+          document.querySelector("#anzeige-ort").innerText = "Ort: Geschäftsstelle, 10115 Berlin-Mitte";
+        }
+
+      } else {
+
+        //falls keine Registrierungsdaten angegeben werden
+        document.querySelector("#bestaetigung").style["display"] = "none";
+
+        document.querySelector("#fehlermeldung").innerText = "Keine Registrierungsdaten vorhanden. Bitte zuerst eine Spende registrieren!";
+      }
+    </script>
+  </body>
+</html>

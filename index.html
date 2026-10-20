@@ -104,16 +104,23 @@
         let krisengebiet = document.querySelector('select[name="krisengebiet"]').value;
         let kleidungsart = document.querySelector('select[name="kleidungsart"]').value;
 
+        //Krisengebiet und Kleidungsart müssen ausgewählt sein
         if (krisengebiet ==="" || kleidungsart === "") {
           alert("Bitte Krisengebiet und Kleidungsart auswählen.");
           return false;
         }
 
-        //Adresse für Abholung überprüfen
-        if(uebergabe.value === "abholung") {
-          let strasse = document.querySelector('input[name="strasse"]').value.trim();
-          let ort = document.querySelector('input[name="ort"]').value.trim();
-          let plz = document.querySelector('input[name="plz"]').value;
+        //Variablen für Adresse
+          let strasse = "";
+          let ort = "";
+          let plz = "";
+
+          //bei Abholung die Adresse überprüfen
+          if (uebergabe.value === "abholung") {
+
+            strasse = document.querySelector('input[name="strasse"]').value.trim();
+            ort = document.querySelector('input[name="ort"]').value.trim();
+            plz = document.querySelector('input[name="plz"]').value.trim();
 
           //prüft, ob Straße und Ort eingetragen sind
           if (strasse.length === 0 || ort.length === 0) {
@@ -121,13 +128,13 @@
             return false;
           }
       
-          //prüft, ob Plz 5 Zeichen lang ist
+          //prüft Länge der plz
           if (plz.length !== 5) {
             alert("Ungültige Postleitzahl");
             return false;
           }
 
-          //prüft, ob nur Ziffern enthalten sind
+          //prüft für plz, ob nur Ziffern enthalten sind
           for (let i = 0; i < plz.length; i++) {
             let zeichen = plz.slice(i, i + 1);
 
@@ -137,15 +144,38 @@
             }
           }
 
-          //prüft, ob die Plz mit 10 beginnt (gültiger Bereich)
+          //prüft Bereich der plz
           if (plz.slice(0,2) !== "10") {
             alert("Eine Abholung ist in diesem Bereich nicht möglich");
             return false;
           }
         }
 
-        alert("Die erste Prüfung war erfolgreich!");
+        //Zeitpunkt der Spende
+        let jetzt = new Date();
+
+        //Registrierungsdaten zusammenfassen
+        let spende = {
+          uebergabeart: uebergabe.value,
+          kleidungsart: kleidungsart,
+          krisengebiet: krisengebiet,
+          strasse: strasse,
+          plz: plz,
+          ort: ort,
+          datum: jetzt.toLocaleDateString("de-DE"),
+          uhrzeit: jetzt.toLocaleTimeString("de-DE", {
+            hour: "2-digit",
+            minute: "2-digit"
+          })
+        };
+
+        //Daten vorübergehend im Browser speichern
+        sessionStorage.setItem("kleiderspende", JSON.stringify(spende));
+
+        //Bestätigungsseite öffnen
+        window.location.href = "bestaetigung.html";
         return false;
+
       };
     </script>
   </body>
