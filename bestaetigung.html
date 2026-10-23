@@ -5,34 +5,142 @@
     <title>Bestätigung</title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/css/bootstrap.min.css">
+    <style>
+      .marke {
+        color: #083d70;
+        font-size: 24px;
+      } 
+
+      .markenfarbe {
+        color: #083d70;
+      }
+
+      .nav-link {
+        color: #083d70;
+      }
+
+      .nav-link:hover {
+        color: #062d52;
+      }
+
+      .btn-primary {
+        background-color: #083d70;
+        border-color: #083d70;
+      }
+
+      .btn-primary:hover {
+        background-color: #062d52;
+        border-color: #062d52;
+      }
+    </style>       
   </head>
   <body>
-    <header class="container">
-      <h1>KleiderKompass</h1>
+    <header class="container py-3 mb-4 border-bottom">
+
+      <div class="row align-items-center">
+
+        <div class="row align-items-center">
+
+        <div class="col-lg-6 col-sm-12">
+          <div class="d-flex align-items-center gap-3">
+            <img src="logo1.png"
+                 alt="KleiderKompass Logo"
+                 width="70"
+                 class="img-fluid">
+
+            <div>
+              <h1 class="marke mb-1">KleiderKompass e. V.</h1>
+              <p class="text-secondary mb-0">Gemeinsam Hilfe in die Wege leiten.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-sm-12">
+          <nav>
+            <ul class="nav justify-content-lg-end">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#start">
+                  Startseite
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#registrierung">
+                  Spende registrieren
+                </a>
+              </li>
+            </ul>      
+          </nav>
+        </div>
+      </div>
     </header>
 
     <main class="container">
 
-      <div id="bestaetigung"> 
-        <h2>Registrierung erfolgreich!</h2>
-        <p>Vielen Dank für deine Kleiderspende</p>
+      <div class="row">
 
-        <h3>Deine Angaben:</h3>
+        <div class="col-lg-8 col-sm-12">
 
-        <p id="anzeige-kleidungsart"></p>
-        <p id="anzeige-krisengebiet"></p>
-        <p id="anzeige-uebergabeart"></p>
-        <p id="anzeige-datum"></p>
-        <p id="anzeige-uhrzeit"></p>
-        <p id="anzeige-ort"></p>
+          <div id="bestaetigung" class="border rounded p-4">
+
+            <h2 class="markenfarbe mb-4">
+              Registrierung erfolgreich!
+            </h2>
+
+            <p>Vielen Dank für deine Kleiderspende.</p>
+
+            <h3 class="mb-4">Deine Angaben:</h3>
+
+            <p id="anzeige-kleidungsart"></p>
+            <p id="anzeige-krisengebiet"></p>
+            <p id="anzeige-uebergabeart"></p>
+            <p id="anzeige-datum"></p>
+            <p id="anzeige-uhrzeit"></p>
+            <p id="anzeige-ort"></p>
+ 
+          </div>
+
+          <p id="fehlermeldung"></p>
+
+        </div>
+
       </div>
-
-      <p id="fehlermeldung"></p>
 
     </main>
 
-    <footer class="container">
-      <p>&copy; 2026 KleiderKompass - Fiktives Studienprojekt</p>
+    <footer class="container mt-5 py-4 border-top text-secondary">
+
+      <div class="row g-3">
+
+        <div class="col-lg-6 col-sm-12">
+          <p class="mb-1">
+            &copy; 2026 KleiderKompass e. V.
+          </p>
+
+          <p class="small mb-0">
+            Fiktives Studienprojekt.
+          </p>
+        </div>
+
+        <div class="col-lg-6 col-sm-12">
+          <p class="mb-1">
+            <strong>Rechtliche Hinweise</strong>
+          </p>
+
+          <p class="small mb-2">
+            <strong>Impressum:</strong>
+            KleiderKompass ist ein fiktiver Verein.
+            Diese Webseite dient ausschließlich dem Projekt.
+          </p>
+
+          <p class="small mb-0">
+            <strong>Datenschutz:</strong>
+            Registrierungsdaten werden vorübergehend im Browser gespeichert.
+            Es erfolgt keine Übermittlung der Daten an einen Server.
+          </p>
+        </div>
+
+      </div>
+      
     </footer>
 
     <script>
